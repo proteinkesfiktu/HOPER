@@ -78,6 +78,11 @@ def make_prediction(representation_name,data_preproceed,tested_model,classifier_
             #params=ast.literal_eval(parameters[i]['best parameter'][0])
             model = joblib.load(tested_model[i])           
             model_label_pred_lst=model.predict(representation_vector)   
+        elif (classifier_name[i]=='XGBoost'):
+                         
+            #params=ast.literal_eval(parameters[i]['best parameter'][0])
+            model = joblib.load(tested_model[i])           
+            model_label_pred_lst=model.predict(representation_vector)   
       
      
         if (classifier_name[i]== 'Fully_Connected_Neural_Network'):
@@ -87,7 +92,7 @@ def make_prediction(representation_name,data_preproceed,tested_model,classifier_
             class_num=1
             
             model_class=binary_pytorch_network.Net(input_size,class_num)
-            #import pdb; pdb.set_trace()
+
             model_class.load_state_dict(copy.deepcopy(torch.load(tested_model[i])))
             model_class.eval()
             x = torch.tensor(representation_vector)
